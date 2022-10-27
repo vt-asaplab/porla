@@ -1,7 +1,7 @@
 # EDPOR: Efficient Dynamic Proof of Retrievability for Cold Storage
 ![x86](https://github.com/tunglevt/EDPOR/blob/main/Utils/workflows/x86/badge.svg)
 
-This is our full implementation for private audit setting. 
+This is our full implementation for our [Porla paper](https://eprint.iacr.org/2022/1417). 
 
 **WARNING**: This is an academic proof-of-concept prototype and has not received careful code review. This implementation is NOT ready for production use.
 
