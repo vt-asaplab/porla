@@ -1,5 +1,5 @@
 # EDPOR: Efficient Dynamic Proof of Retrievability for Cold Storage
-![x86](https://github.com/tunglevt/EDPOR/blob/main/Utils/workflows/x86/badge.svg)
+![x86](https://github.com/vt-asaplab/porla/blob/main/Utils/workflows/x86/badge.svg)
 
 This is our full implementation for our [Porla paper](https://eprint.iacr.org/2022/1417). 
 
