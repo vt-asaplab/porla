@@ -33,6 +33,9 @@ MAC_Block            **commitment_array;
 
 int                  bucket_window;
 size_t               scratch_size;
+
+// Constant 0
+secp256k1_scalar     szero;
 #else 
 bn254_scalar         *sc;
 bn254_scalar         **sc_array;
@@ -137,6 +140,8 @@ Server::Server()
     sc               = sc_array[0];
     scratch          = scratch_array[0];
     commitment_parts = commitment_array[0];
+
+    secp256k1_scalar_set_int(&szero, 0);
 #else 
     sc_array = new bn254_scalar*[MAX_NUM_THREADS_SERVER];
     for(int i = 0; i < MAX_NUM_THREADS_SERVER; ++i)
@@ -334,7 +339,6 @@ void Server::compute_commitment(Data_Block &data_block, MAC_Block &commitment)
         res.push_back(pool.enqueue([this, t, start_chunk, end_chunk, &data_block]() 
         {
             int n_points = NUM_CHUNKS/MAX_NUM_THREADS_SERVER;
-            secp256k1_scalar  szero;
             ecmult_multi_data data; 
             for(int i = start_chunk; i < end_chunk; ++i)
                 convert_ZZ_to_scalar(sc[i], data_block[i]);
@@ -342,7 +346,6 @@ void Server::compute_commitment(Data_Block &data_block, MAC_Block &commitment)
             data.sc = &sc[start_chunk];
             data.pt = &generators[start_chunk];
 
-            secp256k1_scalar_set_int(&szero, 0);
             secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitment_parts[t], &szero, ecmult_multi_callback, &data, n_points);
         }));
         start_chunk = end_chunk;
@@ -499,13 +502,10 @@ void Server::align_MAC(Data_Block &A, MAC_Block &B, int thread)
                 c   %= GROUP_ORDER;
                 convert_ZZ_to_scalar(sc[i], c);
             }
-            secp256k1_scalar  szero;
             ecmult_multi_data data; 
-        
             data.sc = &sc[start_chunk];
             data.pt = &generators[start_chunk];
 
-            secp256k1_scalar_set_int(&szero, 0);
             secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitments[t], &szero, ecmult_multi_callback, &data, NUM_CHUNKS/MAX_NUM_THREADS_SERVER);
         }));
         start_chunk = end_chunk;
@@ -834,9 +834,6 @@ void Server::audit(uint8_t *audit_info)
     ecmult_multi_data data; 
     data.sc = sc;
     data.pt = ptc;
-
-    secp256k1_scalar szero;
-    secp256k1_scalar_set_int(&szero, 0);
 
     int    bucket_window = secp256k1_pippenger_bucket_window(n_points);
     size_t scratch_size  = secp256k1_pippenger_scratch_size(n_points, bucket_window);
@@ -2356,13 +2353,10 @@ void Server::inner_product_prove(NTL::vec_ZZ &a, NTL::vec_ZZ &b, uint8_t *proof)
         {
             res.push_back(pool.enqueue([this, t, start_pos]() 
             {
-                secp256k1_scalar    szero;
                 ecmult_multi_data_p data; 
-
                 data.sc = &sc[start_pos];
                 data.pt = &ptp[start_pos];
 
-                secp256k1_scalar_set_int(&szero, 0);
                 secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitment_parts[t], &szero, ecmult_multi_callback_p, &data, (NUM_CHUNKS>>1)/MAX_NUM_THREADS_SERVER);
             }));
             start_pos += (NUM_CHUNKS>>1)/MAX_NUM_THREADS_SERVER;
@@ -2409,13 +2403,10 @@ void Server::inner_product_prove(NTL::vec_ZZ &a, NTL::vec_ZZ &b, uint8_t *proof)
         {
             res.push_back(pool.enqueue([this, t, start_pos]() 
             {
-                secp256k1_scalar    szero;
                 ecmult_multi_data_p data; 
-
                 data.sc = &sc[start_pos];
                 data.pt = &ptp[start_pos];
 
-                secp256k1_scalar_set_int(&szero, 0);
                 secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitment_parts[t], &szero, ecmult_multi_callback_p, &data, (NUM_CHUNKS>>1)/MAX_NUM_THREADS_SERVER);
             }));
             start_pos += (NUM_CHUNKS>>1)/MAX_NUM_THREADS_SERVER;

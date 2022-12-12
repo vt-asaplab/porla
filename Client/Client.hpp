@@ -33,6 +33,8 @@ secp256k1_ge        *pt;
 secp256k1_ge        **ptp;
 secp256k1_scratch   **scratch;
 MAC_Block           *commitment_parts;
+// Constant 0
+secp256k1_scalar    szero;
 #else 
 bn254_scalar        *sc;
 #endif 
@@ -120,6 +122,7 @@ Client::Client()
     for(int i = 0; i < MAX_NUM_THREADS_CLIENT; ++i)
         scratch[i] = secp256k1_scratch_create(&ctx->error_callback, scratch_size + PIPPENGER_SCRATCH_OBJECTS*ALIGNMENT);
     commitment_parts = new MAC_Block[MAX_NUM_THREADS_CLIENT]; 
+    secp256k1_scalar_set_int(&szero, 0);
 #else 
     sc      = new bn254_scalar[NUM_CHUNKS];
 #endif 
@@ -381,7 +384,7 @@ void Client::compute_commitment(Data_Block &data_block, MAC_Block &commitment)
         res.push_back(pool.enqueue([this, t, start_chunk, end_chunk, &data_block]() 
         {
             int n_points = NUM_CHUNKS/MAX_NUM_THREADS_CLIENT;
-            secp256k1_scalar  szero;
+            
             ecmult_multi_data data; 
             for(int i = start_chunk; i < end_chunk; ++i)
                 convert_ZZ_to_scalar(sc[i], data_block[i]);
@@ -389,7 +392,6 @@ void Client::compute_commitment(Data_Block &data_block, MAC_Block &commitment)
             data.sc = &sc[start_chunk];
             data.pt = &alpha_generators[start_chunk];
 
-            secp256k1_scalar_set_int(&szero, 0);
             secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitment_parts[t], &szero, ecmult_multi_callback, &data, n_points);
         }));
         start_chunk = end_chunk;
@@ -772,9 +774,6 @@ void Client::audit()
             ecmult_multi_data data; 
             data.sc = &sc[start_pos];
             data.pt = &pt[start_pos];
-
-            secp256k1_scalar szero;
-            secp256k1_scalar_set_int(&szero, 0);
 
             secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &complements[t], &szero, ecmult_multi_callback, &data, n_point_each_thread);
         }));
@@ -1599,13 +1598,9 @@ void Client::inner_product_verify(MAC_Block &commitment, uint8_t *proof)
         count++;
     }
 
-    secp256k1_scalar    szero;
     ecmult_multi_data_p data; 
-
     data.sc = sc;
     data.pt = ptp;
-
-    secp256k1_scalar_set_int(&szero, 0);
 
     vector<future<void>> res;
     ThreadPool *pool = new ThreadPool(MAX_NUM_THREADS_CLIENT);
@@ -1616,13 +1611,10 @@ void Client::inner_product_verify(MAC_Block &commitment, uint8_t *proof)
     {
         res.push_back(pool->enqueue([this, t, start_pos]() 
         {
-            secp256k1_scalar    szero;
             ecmult_multi_data_p data; 
-
             data.sc = &sc[start_pos];
             data.pt = &ptp[start_pos];
 
-            secp256k1_scalar_set_int(&szero, 0);
             secp256k1_ecmult_multi_var(&ctx->error_callback, scratch[t], &commitment_parts[t], &szero, ecmult_multi_callback_p, &data, NUM_CHUNKS/MAX_NUM_THREADS_CLIENT);
         }));
         start_pos += NUM_CHUNKS/MAX_NUM_THREADS_CLIENT;
