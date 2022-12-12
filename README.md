@@ -35,7 +35,7 @@ make
 ```
 This is going to create executable files *Server* in **Server** folder and *Client* in **Client** folder.
 
-## Testing:
+## Testing
 
 Before starting test, in folder ``Server``, we need to create 3 subfolders: **H_X**, **H_Y** and **U**. 
 
