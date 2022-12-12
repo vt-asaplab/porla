@@ -56,3 +56,24 @@ Comment/uncomment the line 7 ``#define         ENABLE_KZG                  1`` o
 
 ## Configuring top-caching level:
 Change the constant defined at the line 5 ``#define         TOP_CACHING_LEVEL           10`` of file **config.hpp** and recompile. 
+
+## Citing
+
+If the code is found useful, we would be appreciated if our paper can be cited with the following bibtex format 
+
+```
+@misc{tung2022porla,
+      author = {Tung Le and Pengzhi Huang and Attila A. Yavuz and Elaine Shi and Thang Hoang},
+      title = {Efficient Dynamic Proof of Retrievability for Cold Storage},
+      howpublished = {Cryptology ePrint Archive, Paper 2022/1417},
+      year = {2022},
+      doi = {10.14722/ndss.2023.23307},
+      note = {\url{https://eprint.iacr.org/2022/1417}},
+      url = {https://eprint.iacr.org/2022/1417}
+}
+```
+
+
+# Further Information
+For any inquiries, bugs, and assistance on building and running the code, please contact me at [tungle@vt.edu](mailto:tungle@vt.edu?Subject=[PORLA]%20Inquiry).
+
