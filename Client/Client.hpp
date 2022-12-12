@@ -1489,7 +1489,7 @@ void Client::inner_product_verify(MAC_Block &commitment, uint8_t *proof)
     x_values.SetLength(NUM_CHUNKS);
     for(int i = 0; i < NUM_CHUNKS; ++i)
         x_values[i] = 1;
-
+    
     secp256k1_sha256 sha256;
     secp256k1_sha256_initialize(&sha256);
     secp256k1_sha256_write(&sha256, random_str, 32);
@@ -1597,10 +1597,6 @@ void Client::inner_product_verify(MAC_Block &commitment, uint8_t *proof)
         ptp[count] = &generators[pos];
         count++;
     }
-
-    ecmult_multi_data_p data; 
-    data.sc = sc;
-    data.pt = ptp;
 
     vector<future<void>> res;
     ThreadPool *pool = new ThreadPool(MAX_NUM_THREADS_CLIENT);
