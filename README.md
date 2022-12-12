@@ -62,7 +62,7 @@ Change the constant defined at the line 5 ``#define         TOP_CACHING_LEVEL   
 If the code is found useful, we would be appreciated if our paper can be cited with the following bibtex format 
 
 ```
-@misc{tung2022porla,
+@inproceedings{tung2022porla,
       author = {Tung Le and Pengzhi Huang and Attila A. Yavuz and Elaine Shi and Thang Hoang},
       title = {Efficient Dynamic Proof of Retrievability for Cold Storage},
       howpublished = {Cryptology ePrint Archive, Paper 2022/1417},
