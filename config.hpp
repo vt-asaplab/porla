@@ -31,7 +31,7 @@ const int       MAX_BLOCKS_SENT             =  1024;
 // The number of blocks in each level of H and C to perform audit
 const int       NUM_CHECK_AUDIT             =  128;
 
-// Secrey key for PRF
+// Secret key for PRF
 const int       AES_DATA_SIZE               =  16;
 const int       AES_KEY_SIZE                =  16;
 const int       AES_IV_SIZE                 =  16;
