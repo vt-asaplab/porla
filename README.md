@@ -65,11 +65,10 @@ If the code is found useful, we would be appreciated if our paper can be cited w
 @inproceedings{tung2022porla,
       author = {Tung Le and Pengzhi Huang and Attila A. Yavuz and Elaine Shi and Thang Hoang},
       title = {Efficient Dynamic Proof of Retrievability for Cold Storage},
-      howpublished = {Network and Distributed Systems Security (NDSS) Symposium 2023},
-      year = {2022},
+      year = {2023},
+      url = {https://eprint.iacr.org/2022/1417},
       doi = {10.14722/ndss.2023.23307},
-      note = {\url{https://eprint.iacr.org/2022/1417}},
-      url = {https://eprint.iacr.org/2022/1417}
+      booktitle = {Network and Distributed Systems Security (NDSS) Symposium 2023},
 }
 ```
 
