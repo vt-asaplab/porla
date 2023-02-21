@@ -12,7 +12,7 @@ F_l  = fft_vandermonde_matrix(n, l);
 D_lt = fft_diag_matrix(n, l, t);
 
 % Generator matrix
-G       = [F_l, D_lt * F_l];
+G    = [F_l, D_lt * F_l];
 
 % Original data
 data = randi([1 100], 1, 2^l);
@@ -32,7 +32,7 @@ H_size = length(H_l_hat);
 for i = 1:2^l 
     % Choose a random column as corrupted column to be removed
     j = randi(H_size);
-
+    
     % Remove in Hierarchical Log
     H_l_hat(:,j) = [];
 
