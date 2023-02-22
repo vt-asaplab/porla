@@ -1,5 +1,11 @@
 clear; clc;
 
+% Implementation of Error Correction Code ICC 
+% http://elaineshi.com/docs/por.pdf
+% Practical Dynamic Proofs of Retrievability, CCS' 13
+% Author: Tung Le
+% Email: tungle@vt.edu 
+
 % Number of data blocks
 n = 2^6;
 % Level
@@ -22,31 +28,31 @@ disp('Data: ');
 disp(data);
 
 % Hierarchical log at level l
-H_l  = data * G;
+H_l = data * G;
 
 % Suppose that 2^l positions have been corrupted 
 % And other 2^l positions are good
-H_l_hat = H_l;
-G_l_hat = G;
+sub_H_l = H_l;
+sub_G_l = G;
 
-H_size = length(H_l_hat); 
+H_size  = length(sub_H_l); 
 
 for i = 1:2^l
     % Choose a random column as corrupted column to be removed
     j = randi(H_size);
     
     % Remove column j in Hierarchical Log H
-    H_l_hat(:,j) = [];
+    sub_H_l(:,j) = [];
     
     % Remove column j in Generator G
-    G_l_hat(:, j) = [];
+    sub_G_l(:, j) = [];
     
     % Decrease size due to the removed column
     H_size = H_size - 1;
 end
 
 % Recover data by using only 2^l arbitrary columns
-recovered_data = int32(H_l_hat * inv(G_l_hat));
+recovered_data = int32(sub_H_l * inv(sub_G_l));
 
 % Display recovered data
 disp('Recovered Data: ');
