@@ -65,7 +65,7 @@ Folder ``ICC`` contains MATLAB code to examplify how to build Incrementally Cons
 If the code is found useful, we would be appreciated if our paper can be cited with the following bibtex format 
 
 ```
-@inproceedings{tung2022porla,
+@inproceedings{le2022porla,
       author = {Tung Le and Pengzhi Huang and Attila A. Yavuz and Elaine Shi and Thang Hoang},
       title = {Efficient Dynamic Proof of Retrievability for Cold Storage},
       year = {2023},
