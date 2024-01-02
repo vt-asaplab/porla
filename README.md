@@ -58,7 +58,7 @@ Comment/uncomment the line 7 ``#define         ENABLE_KZG                  1`` o
 Change the constant defined at the line 5 ``#define         TOP_CACHING_LEVEL           10`` of file **config.hpp** and recompile. 
 
 ## Error Correction Code (ICC)
-Folder ``ICC`` contains MATLAB code to examplify how to build Incrementally Constructible Code (ICC) implemented in Porla, as well as how to use ICC to recover data.
+Folder ``icc`` contains MATLAB code to examplify how to build Incrementally Constructible Code (ICC) implemented in Porla, as well as how to use ICC to recover data.
 
 ## Citing
 
