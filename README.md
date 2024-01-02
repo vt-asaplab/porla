@@ -15,10 +15,15 @@ This is our full implementation for our [Porla paper](https://dx.doi.org/10.1472
 
 4. [Gnark-crypto v0.6.0](https://github.com/ConsenSys/gnark-crypto/releases/tag/v0.6.0)
 
-You may need to modify paths of these libraries in the Makefile:
+You can run the script file **auto_setup.sh** to automatically install the required libraries and build source code. 
+```
+sudo ./auto_setup.sh
+```
+
+Otherwise, you may need to modify paths of these libraries in the Makefile:
 
 ```
-EDPOR/Makefile
+porla/Makefile
 ```
 
 # Build & Compile
