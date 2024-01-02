@@ -1,5 +1,5 @@
 # Efficient Dynamic Proof of Retrievability for Cold Storage
-![x86](https://github.com/vt-asaplab/porla/blob/main/Utils/workflows/x86/badge.svg)
+![x86](https://github.com/vt-asaplab/porla/blob/main/porla/Utils/workflows/x86/badge.svg)
 
 This is our full implementation for our [Porla paper](https://dx.doi.org/10.14722/ndss.2023.23307). 
 
