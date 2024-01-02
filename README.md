@@ -11,7 +11,7 @@ This is our full implementation for our [Porla paper](https://dx.doi.org/10.1472
 
 2. [ZeroMQ v4.8.1](https://github.com/zeromq/cppzmq/releases/tag/v4.8.1)
 
-3. [Secp256k1](https://github.com/bitcoin-core/secp256k1/tree/423b6d19d373f1224fd671a982584d7e7900bc93)
+3. [Secp256k1](https://github.com/bitcoin-core/secp256k1/tree/423b6d19d373f1224fd671a982584d7e7900bc93) (**Note: checkout the correct version as listed here**)
 
 4. [Gnark-crypto v0.6.0](https://github.com/ConsenSys/gnark-crypto/releases/tag/v0.6.0)
 
