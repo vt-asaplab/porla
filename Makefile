@@ -10,7 +10,7 @@ GMP_LIB=/usr/local/lib/libgmp.a
 OPENSSL_LIB=-L/usr/local/lib
 
 DEPS=$(ZEROMQ_LIB) $(GMP_LIB) $(OPENSSL_LIB) $(SECP256K1_LIB) $(NTL_LIB)
-LIBS=-lzmq -lgmp -lm -lcrypto -lntl -lsecp256k1
+LIBS=-lzmq -lgmp -lm -lcrypto -lntl -lsecp256k1 -lmultiexp
 
 all:
 	cd Server; $(CC) $(CFLAGS) $(INCLUDE_PATH) *.cpp -o Server $(DEPS) $(LIBS)
