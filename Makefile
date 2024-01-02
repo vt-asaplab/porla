@@ -1,15 +1,16 @@
-CC=/opt/homebrew/Cellar/gcc/12.2.0/bin/g++-12
-CFLAGS=-std=c++11 -O3 -pthread -march=armv8-a+simd+crypto+crc
+CC=g++
+CFLAGS=-std=c++11 -O3 -pthread -march=native
 INCLUDE_PATH=-I. -I../ -I../Utils/secp256k1_lib -I/usr/local/include
 
+# Change the following paths of libraries if necessary
 SECP256K1_LIB=/usr/local/lib/libsecp256k1.a
-NTL_LIB=-L/usr/local/lib/
-ZEROMQ_LIB=-L/opt/homebrew/Cellar/zeromq/4.3.4/lib 
-GMP_LIB=-L/opt/homebrew/Cellar/gmp/6.2.1_1/lib 
-OPENSSL_LIB=-L/opt/homebrew/opt/openssl/lib 
+NTL_LIB=/usr/local/lib/libntl.a
+ZEROMQ_LIB=-L/usr/local/lib
+GMP_LIB=/usr/local/lib/libgmp.a
+OPENSSL_LIB=-L/usr/local/lib
 
 DEPS=$(ZEROMQ_LIB) $(GMP_LIB) $(OPENSSL_LIB) $(SECP256K1_LIB) $(NTL_LIB)
-LIBS=-lzmq -lgmp -lm -lcrypto -lntl
+LIBS=-lzmq -lgmp -lm -lcrypto -lntl -lsecp256k1
 
 all:
 	cd Server; $(CC) $(CFLAGS) $(INCLUDE_PATH) *.cpp -o Server $(DEPS) $(LIBS)
