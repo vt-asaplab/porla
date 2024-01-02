@@ -26,7 +26,7 @@ wget https://gmplib.org/download/gmp/gmp-6.3.0.tar.xz --no-check-certificate
 tar -xf gmp-6.3.0.tar.xz 
 cd gmp-6.3.0/
 ./configure
-make 
+make -j 8
 sudo make install 
 cd .. 
 sudo ldconfig
@@ -36,7 +36,7 @@ wget https://libntl.org/ntl-11.5.1.tar.gz --no-check-certificate
 tar -zxvf ntl-11.5.1.tar.gz
 cd ntl-11.5.1/src
 ./configure GMP_PREFIX=/usr/local/lib
-make
+make -j 8
 # make check
 sudo make install
 cd ../..
@@ -63,4 +63,4 @@ cd ..
 # Build porla source code
 cd porla
 make clean 
-make
+make -j 8
