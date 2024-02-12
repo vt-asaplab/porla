@@ -52,7 +52,7 @@ for i = 1:2^l
 end
 
 % Recover data by using only 2^l arbitrary columns
-recovered_data = int32(sub_H_l * inv(sub_G_l));
+recovered_data = int32(sub_G_l'\sub_H_l')';
 
 % Display recovered data
 disp('Recovered Data: ');
